@@ -11,9 +11,8 @@ For that, we need to export all context from utils to outside world.
 - it creates package-lock.json (extra info making npm a bit faster and secure)
 - it creates node_modules directory with the libraries
 
-2. Extra info in package-lock.json if we were to install the
+2. Extra info in package-lock.json if we were to install the library again, and it's maintained by npm :
 
-- library again, maintained by npm :
 - "version": "10.8.0", --> exact version we installed
 - "resolved": "http//re", --> where it was fetched
 - "integrity": "sha52-mXX --> sha# making sure we are getting the exact code
@@ -28,3 +27,5 @@ For that, we need to export all context from utils to outside world.
    ```js
    import validator from "validator";
    ```
+
+New module: [Chalk](https://www.npmjs.com/package/chalk) - Customize how text gets printed to the console.
