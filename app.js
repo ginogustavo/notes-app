@@ -1,39 +1,55 @@
-const getNotes = require("./notes");
 const chalk = require("chalk");
+const yargs = require("yargs");
+const getNotes = require("./notes");
 
-const message = getNotes();
-console.log(message);
+// const command = process.argv[2];
 
-console.log(chalk.green("Success!"));
+// if (command === "add") {
+//   console.log("Adding Note!");
+// } else if (command === "remove") {
+//   console.log("Removing Note!");
+// }
 
-const log = console.log;
+//Customize yargs
 
-log(chalk.blue("Hello") + " World " + chalk.red("!"));
-log(chalk.red("one", "two", "three"));
-log(chalk.magenta("Second " + chalk.underline.bgBlue("line") + "!"));
-log(chalk.bold("testing Bold"));
-log(
-  chalk.green(
-    "I'm a green line " +
-      chalk.blue.underline.bold("with a blue substring") +
-      " that becomes again"
-  )
-);
+yargs.version("1.1.0");
 
-//ES2015 template literal
-log(`
-    CPU : ${chalk.red("90%")} 
-    RAM : ${chalk.green("40%")} 
-    DISK : ${chalk.yellow("70%")} 
-`);
+// add, remove, read, list
+// Create add command
+yargs.command({
+  command: "add",
+  describe: "Add a new note",
+  handler: function () {
+    console.log("Adding a new note");
+  },
+});
+//if you type --help it'll print out also this command
 
-//ES2015 tagged template literal
-// log(chalk`
-// CPU: {red ${cpu.totalPercent}%}
-// RAM: {green ${(ram.used / ram.total) * 100}%}
-// DISK: {rgb(255,131,0) ${(disk.used / disk.total) * 100}% }
-// `);
+// Create remove command
+yargs.command({
+  command: "remove",
+  describe: "Remove a note",
+  handler: function () {
+    console.log("Removing the note");
+  },
+});
 
-log(chalk.keyword("orange")("yay for orange colored text"));
-log(chalk.rgb(123, 45, 67).underline("Underlined reddish color"));
-log(chalk.hex("#DEADED").bold("Bold Gray"));
+//Create list command
+yargs.command({
+  command: "list",
+  describe: "List notes",
+  handler: function () {
+    console.log("Listing notes");
+  },
+});
+
+//Create read command
+yargs.command({
+  command: "read",
+  describe: "Read a note",
+  handler: function () {
+    console.log("Reading a note");
+  },
+});
+
+console.log(yargs.argv);

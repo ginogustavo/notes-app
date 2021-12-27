@@ -1,31 +1,41 @@
-Just adding "require" it executes the code, but without a reference, the log will fail, because the name is not referred.
-All Modules has their own Scope.
-For that, we need to export all context from utils to outside world.
+## Arguments
 
-1. install the validator.js module
-   ```
-   $ npm i validator@10.8.0
-   ```
+---
 
-- it updates package.json by adding dependency
-- it creates package-lock.json (extra info making npm a bit faster and secure)
-- it creates node_modules directory with the libraries
+When running **node app.js** we can add argumetns after it. e.g.
 
-2. Extra info in package-lock.json if we were to install the library again, and it's maintained by npm :
+```
+$ node app.js Gino
+```
 
-- "version": "10.8.0", --> exact version we installed
-- "resolved": "http//re", --> where it was fetched
-- "integrity": "sha52-mXX --> sha# making sure we are getting the exact code
+On the process Global variable (for node.js env).
 
-3. In case we delete node_modules, then we can install it again with the package.json and package-lock.json by using the command:
+```
+console.log(process.argv);
+```
 
-   ```
-   $ npm install
-   ```
+### YARGS - utility to parse optsrings
 
-4. For ES6 we could use:
-   ```js
-   import validator from "validator";
-   ```
+```
+npm i yargs@12.0.2
+```
 
-New module: [Chalk](https://www.npmjs.com/package/chalk) - Customize how text gets printed to the console.
+In code:
+
+```
+console.log(yargs.argv);
+```
+
+In terminal
+
+```
+$ node app.js add --title="my Title"
+{ _: [ 'add' ], title: 'my Title', '$0': 'app.js' }
+```
+
+```
+$ node app.js --help
+Options:
+   --help    Show help [boolean]
+   --version Show version number [boolean]
+```
