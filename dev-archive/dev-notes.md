@@ -45,3 +45,19 @@ Run:
 ```
 $ nodemon app.js
 ```
+
+## Debugging
+
+You can write **debugger** and run the command:
+
+```
+$ node inspect app.js
+```
+
+It may says a debugger is not up and running. Go to Chrome and enter:
+
+```
+chrome://inspect
+```
+
+Node debugger is using the built-int V8 debugger tools. Chrome also uses V8. From here we can inspect our application and we pause at that point in time.

@@ -1,5 +1,6 @@
 const fs = require("fs");
 const chalk = require("chalk");
+const { debug } = require("console");
 
 const addNote = (title, body) => {
   //loading the existing notes (stored as json), parsed them, add something new onto the array, saved it back to the system.
@@ -8,6 +9,7 @@ const addNote = (title, body) => {
   // const duplicateNotes = notes.filter((note) => note.title === title);
   const duplicateNote = notes.find((note) => note.title === title); //stops search when found one.
 
+  // debugger;
   //if not find the much the variable is = undefined.
 
   // if (duplicateNotes.length === 0) {
