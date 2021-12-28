@@ -1,14 +1,18 @@
 const fs = require("fs");
 const chalk = require("chalk");
-const getNotes = () => "Your Notes";
 
 const addNote = (title, body) => {
   //loading the existing notes (stored as json), parsed them, add something new onto the array, saved it back to the system.
-  const notes = loadNodes();
+  const notes = loadNotes();
 
-  const duplicateNotes = notes.filter((note) => note.title === title);
+  // const duplicateNotes = notes.filter((note) => note.title === title);
+  const duplicateNote = notes.find((note) => note.title === title); //stops search when found one.
 
-  if (duplicateNotes.length === 0) {
+  //if not find the much the variable is = undefined.
+
+  // if (duplicateNotes.length === 0) {
+  // if (duplicateNote === undefined) {
+  if (!duplicateNote) {
     //push an object
     notes.push({
       title: title,
@@ -27,7 +31,7 @@ const saveNotes = (notes) => {
   fs.writeFileSync("notes.json", dataJSON);
 };
 
-const loadNodes = () => {
+const loadNotes = () => {
   //defensive code (to validate file)
   try {
     const dataBuffer = fs.readFileSync("notes.json");
@@ -39,7 +43,7 @@ const loadNodes = () => {
 };
 
 const removeNote = (title) => {
-  const notes = loadNodes();
+  const notes = loadNotes();
   const notesToKepp = notes.filter((note) => note.title != title);
 
   if (notes.length > notesToKepp.length) {
@@ -51,9 +55,29 @@ const removeNote = (title) => {
   }
 };
 
-//module.exports = getNotes;
+const listNotes = () => {
+  const notes = loadNotes();
+  console.log(chalk.blue.inverse("Your Notes"));
+
+  notes.forEach((note) => {
+    console.log(chalk.blue(" - " + note.title));
+  });
+};
+
+const readNote = (title) => {
+  const notes = loadNotes();
+  const noteFound = notes.find((note) => note.title === title);
+  if (noteFound) {
+    console.log(chalk.blue.inverse(noteFound.title));
+    console.log(noteFound.body);
+  } else {
+    console.log(chalk.red("Not found!"));
+  }
+};
+
 module.exports = {
-  getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote,
+  listNotes: listNotes,
+  readNote: readNote,
 };
