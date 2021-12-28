@@ -2,19 +2,9 @@ const chalk = require("chalk");
 const yargs = require("yargs");
 const notes = require("./notes");
 
-// const command = process.argv[2];
-
-// if (command === "add") {
-//   console.log("Adding Note!");
-// } else if (command === "remove") {
-//   console.log("Removing Note!");
-// }
-
 //Customize yargs
-
 yargs.version("1.1.0");
 
-// add, remove, read, list
 // Create add command
 yargs.command({
   command: "add",
@@ -64,4 +54,3 @@ yargs.command({
 });
 
 yargs.parse();
-// console.log(yargs.argv);

@@ -1,3 +1,45 @@
+const fs = require("fs");
+
 const getNotes = () => "Your Notes";
 
-module.exports = getNotes;
+const addNote = (title, body) => {
+  //loading the existing notes (stored as json), parsed them, add something new onto the array, saved it back to the system.
+  const notes = loadNodes();
+
+  const duplicateNotes = notes.filter((note) => note.title === title);
+
+  if (duplicateNotes.length === 0) {
+    //push an object
+    notes.push({
+      title: title,
+      body: body,
+    });
+    //save the data
+    saveNotes(notes);
+    console.log("New Note saved!");
+  } else {
+    console.log("Note title taken!");
+  }
+};
+
+const saveNotes = function (notes) {
+  const dataJSON = JSON.stringify(notes);
+  fs.writeFileSync("notes.json", dataJSON);
+};
+
+const loadNodes = () => {
+  //defensive code (to validate file)
+  try {
+    const dataBuffer = fs.readFileSync("notes.json");
+    const dataJSON = dataBuffer.toString();
+    return JSON.parse(dataJSON);
+  } catch (e) {
+    return []; // This would be returned if we had an empty file
+  }
+};
+
+//module.exports = getNotes;
+module.exports = {
+  getNotes: getNotes,
+  addNote: addNote,
+};
